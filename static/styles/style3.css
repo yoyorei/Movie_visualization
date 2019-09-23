@@ -1,0 +1,23 @@
+.axis path,
+.axis line {
+  fill: none;
+	stroke:#cdcdcd;
+	shape-rendering: crispEdges;
+}
+.axis text {
+	font-family: sans-serif;
+    font-size: 18px;
+    text-anchor: middle;
+    color: #cdcdcd
+}
+
+body {
+  background-color: black;
+} 
+.gradient {
+    background:
+      linear-gradient(
+        45deg, 
+       #cdcdcd
+      );
+  }

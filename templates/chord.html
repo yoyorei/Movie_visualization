@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <meta HTTP-EQUIV="X-UA-COMPATIBLE" CONTENT="IE=9" >
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+    <title>Domestic Movie Gross D3.js</title>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles/styleC.css') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/d3/d3.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/d3/math/trigonometry.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/d3/svg/arc.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/d3/core/functor.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/d3/core/source.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/d3/core/target.js') }}"></script>
+
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/d3/layout/arc-chord.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/d3/svg/arc-chord.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/brightpoint/gradients.js') }}"></script>
+
+</head>
+<body>
+    <h3><a href="..">Home</a>  <a href="../chord/18">2018</a>  <a href="../chord/17">2017</a>  <a href="../chord/16">2016</a>  <a href="../chord/41231">MCU</a>
+    </h3>
+<!-- <select id="dataSel">
+    <option value="chord2018">2018</option>
+    <option value="chord2017">2017</option>
+    <option value="chord2016">2016</option>
+    <option value="chordMCU">Marvel Cinematic Universe</option>
+</select> -->
+
+
+<div id="bpg">
+
+    <div id="mainDiv">
+        <div id="imgDiv" style="width:300px; margin:0px auto; margin-top:10px">
+            <img id="playPause" src="{{ url_for('static', filename='images/pause_bw.png') }}" width="24" height="24" style="float:left"/>
+            <div style="float:left; margin-top:4px; margin-left:4px">click on a timeline week to skip to that point.</div>
+        </div>
+
+        <div id="svgDiv" style="font-size:10px"></div>
+
+
+
+
+    </div>
+        <div id="toolTip" class="tooltip" style="opacity:0; width:200px; height:90px; position:absolute;">
+            <div id="header1" class="header3"></div>
+            <div class="header-rule"></div>
+            <div id="head" class="header"></div>
+            <div class="header-rule"></div>
+            <div  id="header2" class="header2"></div>
+            <div  class="tooltipTail"></div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/app/globals.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/app/initialize.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/app/events.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/app/data.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/app/_buildChords.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/app/update.js') }}"></script>
+
+    <script type="text/javascript">
+
+        initialize();
+
+        if ({{sel}} == 18) {
+            fetchData("{{ url_for('static', filename='data/wkly_mov_gross_2018.csv') }}");
+        } else if ({{sel}} == 17) {
+            fetchData("{{ url_for('static', filename='data/wkly_mov_gross_2017.csv') }}");
+        } else if ({{sel}} == 16) {
+            fetchData("{{ url_for('static', filename='data/wkly_mov_gross_2016.csv') }}");
+        } else {
+            fetchData("{{ url_for('static', filename='data/wkly_mov_gross_MCU.csv') }}");
+        }
+
+        function run() {
+
+            if (week < 51) week++; else {
+                week=0;
+                if (year < moviesGrouped.length-1) year++;
+            }
+            if (week==maxWeek && year==maxYear)  {
+                week=0;
+                year=0;
+            }
+            else {
+                update(year,week);
+            }
+        }
+
+
+    </script>
+
+</body>
+</html>
